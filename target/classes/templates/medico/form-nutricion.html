@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Asignar Plan Nutricional</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm p-4">
+                    <h3 class="fw-bold text-success mb-3">Prescripción Nutricional</h3>
+                    <p class="text-muted">Asignando plan a: <strong th:text="${deportista.nombreCompleto}"></strong></p>
+                    <hr>
+                    <form th:action="@{/medico/guardar-plan}" th:object="${nuevoPlan}" method="post">
+                        <input type="hidden" name="deportistaId" th:value="${deportista.id}">
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Título del Plan</label>
+                            <input type="text" th:field="*{titulo}" class="form-control" placeholder="Ej: Dieta Post-Lesión" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Descripción / Dieta</label>
+                            <textarea th:field="*{descripcion}" class="form-control" rows="4" placeholder="Detalla las comidas..."></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Recomendaciones Adicionales</label>
+                            <input type="text" th:field="*{recomendaciones}" class="form-control" placeholder="Ej: No consumir azúcares">
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success rounded-pill">Asignar Plan al Deportista</button>
+                            <a th:href="@{/medico/pacientes}" class="btn btn-light rounded-pill">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
